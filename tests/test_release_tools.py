@@ -21,8 +21,9 @@ import validate_release  # noqa: E402
 def write_valid_repository(root: Path) -> bytes:
     releases = root / "releases"
     site = root / "site"
+    assets = site / "assets"
     releases.mkdir(parents=True)
-    site.mkdir(parents=True)
+    assets.mkdir(parents=True)
     pdf_data = b"%PDF-1.4\n1 0 obj\n<<>>\nendobj\n%%EOF\n"
     pdf_path = releases / "neurolab-whitepaper-v0.11.0.pdf"
     pdf_path.write_bytes(pdf_data)
@@ -44,6 +45,7 @@ def write_valid_repository(root: Path) -> bytes:
     tokens = " ".join("{{" + token + "}}" for token in sorted(build_site.TOKENS))
     (site / "index.template.html").write_text(tokens, encoding="utf-8")
     (site / "styles.css").write_text("body {}", encoding="utf-8")
+    (assets / "neurolab-wordmark.png").write_bytes(b"wordmark")
     return pdf_data
 
 
@@ -106,6 +108,10 @@ class SiteBuildTests(unittest.TestCase):
                 (output / "releases" / "neurolab-whitepaper-v0.11.0.pdf").read_bytes(),
                 pdf_data,
             )
+            self.assertEqual(
+                (output / "assets" / "neurolab-wordmark.png").read_bytes(),
+                b"wordmark",
+            )
             public_manifest = json.loads(
                 (output / "current-release.json").read_text(encoding="utf-8")
             )
@@ -113,6 +119,7 @@ class SiteBuildTests(unittest.TestCase):
             self.assertEqual(public_manifest["stableAlias"], "neurolab-whitepaper.pdf")
             rendered_index = (output / "index.html").read_text(encoding="utf-8")
             self.assertIn(build_site.PUBLICATION_TITLE, rendered_index)
+            self.assertIn(hashlib.sha256(b"body {}").hexdigest()[:12], rendered_index)
             self.assertNotIn("{{", rendered_index)
 
 
