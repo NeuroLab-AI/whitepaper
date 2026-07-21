@@ -96,7 +96,6 @@ footer {
 }
 
 .wordmark,
-.repository-link,
 .status-row,
 .eyebrow,
 .card-label,
@@ -112,17 +111,6 @@ footer {
   font-weight: 700;
   letter-spacing: 0.17em;
   text-decoration: none;
-}
-
-.repository-link {
-  color: var(--muted);
-  font-size: 0.78rem;
-  text-underline-offset: 0.35rem;
-}
-
-.repository-link:hover,
-.repository-link:focus-visible {
-  color: var(--accent-light);
 }
 
 .page-shell {
@@ -330,15 +318,6 @@ footer {
 @media (max-width: 560px) {
   .site-header {
     min-height: 5.5rem;
-  }
-
-  .repository-link {
-    font-size: 0;
-  }
-
-  .repository-link::after {
-    content: "GitHub";
-    font-size: 0.72rem;
   }
 
   .status-row {
