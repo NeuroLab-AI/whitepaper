@@ -1,0 +1,9 @@
+{
+  "title": "NeuroLabs Whitepaper",
+  "version": "0.11.0",
+  "displayVersion": "0.11",
+  "releaseDate": "2026-07-20",
+  "file": "releases/neurolab-whitepaper-v0.11.0.pdf",
+  "description": "Initial public review draft of the NeuroLab AI whitepaper.",
+  "sha256": "4e064b01f5c83bd730fc5cea9ac5d1775786466a8fde319ab8cdea3910aa1d57"
+}

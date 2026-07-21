@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{description}}">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{title}}">
+    <meta property="og:description" content="{{description}}">
+    <meta property="og:url" content="https://neurolab-ai.github.io/whitepaper/">
+    <link rel="canonical" href="https://neurolab-ai.github.io/whitepaper/">
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="./styles.css">
+    <title>{{title}} - Version {{display_version}}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="wordmark" href="./" aria-label="NeuroLab AI whitepaper home">
+        NEUROLAB AI
+      </a>
+      <a class="repository-link" href="https://github.com/NeuroLab-AI/whitepaper">View repository</a>
+    </header>
+
+    <main id="main" class="page-shell">
+      <section class="hero" aria-labelledby="whitepaper-title">
+        <div class="status-row">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>Public review draft</span>
+          <span class="status-divider" aria-hidden="true">//</span>
+          <span>Version {{display_version}}</span>
+        </div>
+
+        <p class="eyebrow">Research and engineering whitepaper</p>
+        <h1 id="whitepaper-title">{{title}}</h1>
+        <p class="description">{{description}}</p>
+
+        <div class="actions">
+          <a class="button button-primary" href="{{pdf_path}}" target="_blank" rel="noopener">
+            Read whitepaper
+            <span aria-hidden="true">&nearr;</span>
+          </a>
+          <a class="button button-secondary" href="{{stable_pdf_path}}" download>
+            Download PDF
+          </a>
+        </div>
+
+        <dl class="release-data">
+          <div>
+            <dt>Current version</dt>
+            <dd>{{version}}</dd>
+          </div>
+          <div>
+            <dt>Document version</dt>
+            <dd>{{display_version}}</dd>
+          </div>
+          <div>
+            <dt>Released</dt>
+            <dd>{{release_date}}</dd>
+          </div>
+        </dl>
+      </section>
+
+      <aside class="release-card" aria-label="Publication status">
+        <p class="card-label">Publication status</p>
+        <h2>Current public release</h2>
+        <p>
+          This permanent address always identifies the currently published NeuroLabs whitepaper.
+          Versioned releases remain immutable for review, rollback, and historical reference.
+        </p>
+        <a href="./current-release.json">View release metadata <span aria-hidden="true">&rarr;</span></a>
+      </aside>
+    </main>
+
+    <footer>
+      <span>NeuroLab AI</span>
+      <span>Evidence-led systems for CNS drug discovery</span>
+    </footer>
+  </body>
+</html>
