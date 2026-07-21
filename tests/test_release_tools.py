@@ -27,7 +27,7 @@ def write_valid_repository(root: Path) -> bytes:
     pdf_path = releases / "neurolab-whitepaper-v0.11.0.pdf"
     pdf_path.write_bytes(pdf_data)
     metadata = {
-        "title": "NeuroLabs Whitepaper",
+        "title": "Archived Whitepaper Title",
         "version": "0.11.0",
         "displayVersion": "0.11",
         "releaseDate": "2026-07-20",
@@ -109,8 +109,11 @@ class SiteBuildTests(unittest.TestCase):
             public_manifest = json.loads(
                 (output / "current-release.json").read_text(encoding="utf-8")
             )
+            self.assertEqual(public_manifest["title"], build_site.PUBLICATION_TITLE)
             self.assertEqual(public_manifest["stableAlias"], "neurolab-whitepaper.pdf")
-            self.assertNotIn("{{", (output / "index.html").read_text(encoding="utf-8"))
+            rendered_index = (output / "index.html").read_text(encoding="utf-8")
+            self.assertIn(build_site.PUBLICATION_TITLE, rendered_index)
+            self.assertNotIn("{{", rendered_index)
 
 
 class ReleaseImmutabilityTests(unittest.TestCase):

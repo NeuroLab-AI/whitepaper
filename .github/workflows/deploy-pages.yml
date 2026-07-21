@@ -1,4 +1,4 @@
-name: Deploy NeuroLabs Whitepaper
+name: Deploy NeuroLab Whitepaper
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: Validate NeuroLabs Whitepaper
+name: Validate NeuroLab Whitepaper
 
 on:
   pull_request:

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the static GitHub Pages artifact for the NeuroLabs whitepaper."""
+"""Build the static GitHub Pages artifact for the NeuroLab whitepaper."""
 
 from __future__ import annotations
 
@@ -22,6 +22,7 @@ TOKENS = {
     "pdf_path",
     "stable_pdf_path",
 }
+PUBLICATION_TITLE = "NeuroLab Whitepaper"
 
 
 def _render_template(template: str, values: dict[str, str]) -> str:
@@ -62,7 +63,7 @@ def build(root: Path) -> Path:
 
     release_date = date.fromisoformat(current["releaseDate"])
     values = {
-        "title": current["title"],
+        "title": PUBLICATION_TITLE,
         "description": current["description"],
         "version": current["version"],
         "display_version": current["displayVersion"],
@@ -74,6 +75,7 @@ def build(root: Path) -> Path:
     (output / "index.html").write_text(rendered, encoding="utf-8", newline="\n")
 
     public_manifest = dict(current)
+    public_manifest["title"] = PUBLICATION_TITLE
     public_manifest["stableAlias"] = stable_pdf_name
     public_manifest["versionedUrl"] = current["file"]
     (output / "current-release.json").write_text(
