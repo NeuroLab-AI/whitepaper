@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import html
 import json
 import shutil
@@ -21,6 +22,7 @@ TOKENS = {
     "release_date",
     "pdf_path",
     "stable_pdf_path",
+    "stylesheet_version",
 }
 PUBLICATION_TITLE = "NeuroLab Whitepaper"
 
@@ -46,11 +48,13 @@ def build(root: Path) -> Path:
     if output.exists():
         shutil.rmtree(output)
     (output / "releases").mkdir(parents=True)
+    (output / "assets").mkdir(parents=True)
 
     template_path = root / "site" / "index.template.html"
     stylesheet_path = root / "site" / "styles.css"
-    if not template_path.is_file() or not stylesheet_path.is_file():
-        raise FileNotFoundError("Required site template or stylesheet is missing")
+    wordmark_path = root / "site" / "assets" / "neurolab-wordmark.png"
+    if not all(path.is_file() for path in (template_path, stylesheet_path, wordmark_path)):
+        raise FileNotFoundError("Required site template, stylesheet, or wordmark is missing")
 
     for release_path in sorted((root / "releases").glob("neurolab-whitepaper-v*.*")):
         if release_path.suffix in {".pdf", ".json"}:
@@ -60,6 +64,7 @@ def build(root: Path) -> Path:
     stable_pdf_name = "neurolab-whitepaper.pdf"
     shutil.copy2(current_pdf, output / stable_pdf_name)
     shutil.copy2(stylesheet_path, output / "styles.css")
+    shutil.copy2(wordmark_path, output / "assets" / wordmark_path.name)
 
     release_date = date.fromisoformat(current["releaseDate"])
     values = {
@@ -70,6 +75,7 @@ def build(root: Path) -> Path:
         "release_date": release_date.strftime("%B %d, %Y"),
         "pdf_path": "./" + current["file"],
         "stable_pdf_path": "./" + stable_pdf_name,
+        "stylesheet_version": hashlib.sha256(stylesheet_path.read_bytes()).hexdigest()[:12],
     }
     rendered = _render_template(template_path.read_text(encoding="utf-8"), values)
     (output / "index.html").write_text(rendered, encoding="utf-8", newline="\n")
