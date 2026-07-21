@@ -4,13 +4,6 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - "releases/**"
-      - "site/**"
-      - "scripts/**"
-      - "tests/**"
-      - "current-release.json"
-      - ".github/workflows/**"
   workflow_dispatch:
 
 permissions:
