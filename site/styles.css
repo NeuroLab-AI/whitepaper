@@ -152,12 +152,13 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 7.25rem;
+  min-height: 8.75rem;
+  padding-block: 1.35rem;
   border-bottom: 1px solid var(--border);
 }
 
 .status-row,
-.eyebrow,
+.header-tagline,
 .preview-toolbar,
 .section-label,
 .contents-header,
@@ -167,6 +168,13 @@ footer {
 .release-data dt,
 footer {
   font-family: "Space Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+.header-lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
 }
 
 .wordmark {
@@ -181,19 +189,35 @@ footer {
   height: auto;
 }
 
+.header-divider {
+  width: clamp(3rem, 6vw, 4rem);
+  height: 1px;
+  background: rgba(255, 255, 255, 0.68);
+}
+
+.header-tagline {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(0.62rem, 0.9vw, 0.72rem);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1.45;
+  text-align: center;
+}
+
 .page-shell {
   display: grid;
   grid-template-columns: minmax(0, 1.28fr) minmax(24rem, 0.92fr);
   gap: clamp(2.5rem, 5vw, 5rem);
   align-items: start;
-  padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(4.5rem, 7vw, 6.5rem);
+  padding: clamp(2rem, 3.5vw, 3rem) 0 clamp(4.5rem, 7vw, 6.5rem);
 }
 
 .status-row {
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
-  margin-bottom: 3.25rem;
+  margin-bottom: 2.25rem;
   padding: 0.45rem 0.75rem;
   border: 1px solid rgba(191, 106, 69, 0.34);
   border-radius: 999px;
@@ -217,17 +241,6 @@ footer {
 .status-divider {
   color: var(--accent);
   font-weight: 700;
-}
-
-.eyebrow {
-  margin: 0 0 1rem;
-  color: var(--text);
-  letter-spacing: 0.14em;
-}
-
-.eyebrow {
-  font-size: clamp(0.8rem, 1.15vw, 0.86rem);
-  letter-spacing: 0.1em;
 }
 
 h1 {
@@ -722,7 +735,7 @@ footer {
     grid-template-columns: 1fr;
     align-items: start;
     gap: 3.5rem;
-    padding: 2.75rem 0 4rem;
+    padding: 2.25rem 0 4rem;
   }
 
   .document-preview {
@@ -743,10 +756,6 @@ footer {
     max-width: 12ch;
   }
 
-  .status-row {
-    margin-bottom: 2.25rem;
-  }
-
   h1 {
     font-size: clamp(3.1rem, 17vw, 5.5rem);
   }
@@ -754,11 +763,22 @@ footer {
 
 @media (max-width: 560px) {
   .site-header {
-    min-height: 6rem;
+    min-height: 7.75rem;
+    padding-block: 1.1rem;
   }
 
   .wordmark-image {
     width: clamp(10.5rem, 48vw, 12rem);
+  }
+
+  .header-lockup {
+    gap: 0.55rem;
+  }
+
+  .header-tagline {
+    max-width: 28rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.075em;
   }
 
   .status-row {
