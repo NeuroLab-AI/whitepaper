@@ -52,8 +52,8 @@
               Read Whitepaper
               <span aria-hidden="true">&nearr;</span>
             </a>
-            <a class="button button-secondary" href="{{stable_pdf_path}}" download>
-              Download PDF
+            <a class="button button-secondary download-trigger" href="{{stable_pdf_path}}" download>
+              <span class="download-button-label">Download PDF</span>
             </a>
           </div>
 
@@ -89,7 +89,7 @@
             <span class="preview-tools">
               <span>{{page_count}} pages</span>
               <a
-                class="preview-download"
+                class="preview-download download-trigger"
                 href="{{stable_pdf_path}}"
                 download
                 aria-label="Download whitepaper version {{display_version}} PDF"
@@ -178,14 +178,9 @@
       (() => {
         const preview = document.querySelector(".document-preview");
         const expandButton = document.querySelector(".preview-expand");
-
-        if (!preview || !expandButton) {
-          return;
-        }
-
-        const requestFullscreen = preview.requestFullscreen
+        const requestFullscreen = preview?.requestFullscreen
           ? () => preview.requestFullscreen()
-          : preview.webkitRequestFullscreen
+          : preview?.webkitRequestFullscreen
             ? () => preview.webkitRequestFullscreen()
             : null;
         const exitFullscreen = document.exitFullscreen
@@ -196,37 +191,125 @@
         const fullscreenElement = () =>
           document.fullscreenElement || document.webkitFullscreenElement;
 
-        if (!requestFullscreen || !exitFullscreen) {
+        if (preview && expandButton && requestFullscreen && exitFullscreen) {
+          const syncFullscreenState = () => {
+            const isExpanded = fullscreenElement() === preview;
+            expandButton.setAttribute("aria-pressed", String(isExpanded));
+            expandButton.setAttribute(
+              "aria-label",
+              isExpanded
+                ? "Exit fullscreen whitepaper reader"
+                : "Expand whitepaper reader to fullscreen"
+            );
+            expandButton.title = isExpanded ? "Exit fullscreen" : "Expand reader";
+          };
+
+          expandButton.hidden = false;
+          expandButton.addEventListener("click", async () => {
+            try {
+              if (fullscreenElement() === preview) {
+                await exitFullscreen();
+              } else {
+                await requestFullscreen();
+              }
+            } catch {
+              syncFullscreenState();
+            }
+          });
+          preview.addEventListener("click", async (event) => {
+            if (event.target !== preview || fullscreenElement() !== preview) {
+              return;
+            }
+
+            try {
+              await exitFullscreen();
+            } catch {
+              syncFullscreenState();
+            }
+          });
+          document.addEventListener("fullscreenchange", syncFullscreenState);
+          document.addEventListener("webkitfullscreenchange", syncFullscreenState);
+          syncFullscreenState();
+        }
+
+        const downloadTriggers = document.querySelectorAll(".download-trigger");
+
+        if (!downloadTriggers.length) {
           return;
         }
 
-        const syncFullscreenState = () => {
-          const isExpanded = fullscreenElement() === preview;
-          expandButton.setAttribute("aria-pressed", String(isExpanded));
-          expandButton.setAttribute(
-            "aria-label",
-            isExpanded
-              ? "Exit fullscreen whitepaper reader"
-              : "Expand whitepaper reader to fullscreen"
-          );
-          expandButton.title = isExpanded ? "Exit fullscreen" : "Expand reader";
+        const downloadToast = document.createElement("div");
+        const toastIndicator = document.createElement("span");
+        const toastMessage = document.createElement("span");
+        let toastTimer;
+        let toastClearTimer;
+        const triggerTimers = new WeakMap();
+
+        downloadToast.className = "download-toast";
+        downloadToast.setAttribute("role", "status");
+        downloadToast.setAttribute("aria-live", "polite");
+        downloadToast.setAttribute("aria-atomic", "true");
+        toastIndicator.className = "download-toast-indicator";
+        toastIndicator.setAttribute("aria-hidden", "true");
+        toastMessage.className = "download-toast-message";
+        downloadToast.append(toastIndicator, toastMessage);
+        document.body.append(downloadToast);
+
+        const showDownloadToast = () => {
+          const toastHost = fullscreenElement() || document.body;
+
+          if (downloadToast.parentElement !== toastHost) {
+            toastHost.append(downloadToast);
+          }
+
+          window.clearTimeout(toastTimer);
+          window.clearTimeout(toastClearTimer);
+          toastMessage.textContent = "";
+          downloadToast.classList.remove("is-visible");
+          void downloadToast.offsetWidth;
+          toastMessage.textContent =
+            "Whitepaper download started. Check your downloads.";
+          downloadToast.classList.add("is-visible");
+
+          toastTimer = window.setTimeout(() => {
+            downloadToast.classList.remove("is-visible");
+            toastClearTimer = window.setTimeout(() => {
+              toastMessage.textContent = "";
+            }, 220);
+          }, 3200);
         };
 
-        expandButton.hidden = false;
-        expandButton.addEventListener("click", async () => {
-          try {
-            if (fullscreenElement() === preview) {
-              await exitFullscreen();
-            } else {
-              await requestFullscreen();
+        downloadTriggers.forEach((trigger) => {
+          trigger.addEventListener("click", () => {
+            const label = trigger.querySelector(".download-button-label");
+            const previousTimer = triggerTimers.get(trigger);
+
+            if (previousTimer) {
+              window.clearTimeout(previousTimer);
             }
-          } catch {
-            syncFullscreenState();
-          }
+
+            trigger.classList.remove("is-downloading");
+            void trigger.offsetWidth;
+            trigger.classList.add("is-downloading");
+
+            if (label) {
+              label.dataset.defaultLabel ||= label.textContent.trim();
+              label.textContent = "Download started";
+            }
+
+            showDownloadToast();
+            triggerTimers.set(
+              trigger,
+              window.setTimeout(() => {
+                trigger.classList.remove("is-downloading");
+
+                if (label) {
+                  label.textContent = label.dataset.defaultLabel;
+                }
+              }, 2800)
+            );
+          });
         });
-        document.addEventListener("fullscreenchange", syncFullscreenState);
-        document.addEventListener("webkitfullscreenchange", syncFullscreenState);
-        syncFullscreenState();
       })();
     </script>
   </body>
