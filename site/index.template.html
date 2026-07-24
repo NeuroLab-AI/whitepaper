@@ -25,9 +25,13 @@
     <div class="ambient ambient-two" aria-hidden="true"></div>
 
     <header class="site-header">
-      <a class="wordmark" href="./" aria-label="NeuroLab AI whitepaper home">
-        <img class="wordmark-image" src="./assets/neurolab-wordmark.png" alt="">
-      </a>
+      <div class="header-lockup">
+        <a class="wordmark" href="./" aria-label="NeuroLab AI whitepaper home">
+          <img class="wordmark-image" src="./assets/neurolab-wordmark.png" alt="">
+        </a>
+        <span class="header-divider" aria-hidden="true"></span>
+        <p class="header-tagline">Evidence-Led Systems for CNS Drug Discovery</p>
+      </div>
     </header>
 
     <main id="main">
@@ -40,9 +44,8 @@
             <span>Version {{display_version}}</span>
           </div>
 
-          <p class="eyebrow">Evidence-Led Systems for CNS Drug Discovery</p>
           <h1 id="whitepaper-title">{{title}}</h1>
-          <p class="description">{{description}}</p>
+          <p class="description">Read or download the NeuroLab AI whitepaper.</p>
 
           <div class="actions">
             <a class="button button-primary" href="{{pdf_path}}" target="_blank" rel="noopener">
@@ -64,17 +67,17 @@
             </div>
             <div>
               <dt>
-                <span aria-hidden="true"><span class="metadata-prefix">//</span> Document_version</span>
-                <span class="visually-hidden">Document version</span>
-              </dt>
-              <dd>{{display_version}}</dd>
-            </div>
-            <div>
-              <dt>
                 <span aria-hidden="true"><span class="metadata-prefix">//</span> Released</span>
                 <span class="visually-hidden">Released</span>
               </dt>
               <dd>{{release_date}}</dd>
+            </div>
+            <div>
+              <dt>
+                <span aria-hidden="true"><span class="metadata-prefix">//</span> Pages</span>
+                <span class="visually-hidden">Pages</span>
+              </dt>
+              <dd>{{page_count}}</dd>
             </div>
           </dl>
         </section>
