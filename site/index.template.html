@@ -99,7 +99,7 @@
               </a>
             </span>
           </div>
-          <div class="document-reader">
+          <div class="document-reader" id="whitepaper-reader">
             <iframe
               class="pdf-reader"
               src="{{stable_pdf_path}}#page=1&amp;view=FitH&amp;toolbar=0&amp;navpanes=0"
@@ -118,13 +118,31 @@
               </span>
             </a>
           </div>
-          <a class="preview-caption" href="{{pdf_path}}#page=1" target="_blank" rel="noopener">
-            <span>
+          <div class="preview-caption">
+            <span class="preview-meta">
               <small>Version {{display_version}}</small>
-              <strong>Open Full Whitepaper</strong>
+              <a class="preview-open" href="{{pdf_path}}#page=1" target="_blank" rel="noopener">
+                <strong>Open Full Whitepaper</strong>
+                <span class="preview-arrow" aria-hidden="true">&nearr;</span>
+              </a>
             </span>
-            <span class="preview-arrow" aria-hidden="true">&nearr;</span>
-          </a>
+            <button
+              class="preview-expand"
+              type="button"
+              aria-controls="whitepaper-reader"
+              aria-label="Expand whitepaper reader to fullscreen"
+              aria-pressed="false"
+              title="Expand reader"
+              hidden
+            >
+              <span class="fullscreen-icon" aria-hidden="true">
+                <span class="fullscreen-corner corner-top-left"></span>
+                <span class="fullscreen-corner corner-top-right"></span>
+                <span class="fullscreen-corner corner-bottom-left"></span>
+                <span class="fullscreen-corner corner-bottom-right"></span>
+              </span>
+            </button>
+          </div>
         </aside>
       </div>
 
@@ -153,5 +171,61 @@
     <footer>
       <span>NeuroLab AI</span>
     </footer>
+
+    <script>
+      (() => {
+        const preview = document.querySelector(".document-preview");
+        const expandButton = document.querySelector(".preview-expand");
+
+        if (!preview || !expandButton) {
+          return;
+        }
+
+        const requestFullscreen = preview.requestFullscreen
+          ? () => preview.requestFullscreen()
+          : preview.webkitRequestFullscreen
+            ? () => preview.webkitRequestFullscreen()
+            : null;
+        const exitFullscreen = document.exitFullscreen
+          ? () => document.exitFullscreen()
+          : document.webkitExitFullscreen
+            ? () => document.webkitExitFullscreen()
+            : null;
+        const fullscreenElement = () =>
+          document.fullscreenElement || document.webkitFullscreenElement;
+
+        if (!requestFullscreen || !exitFullscreen) {
+          return;
+        }
+
+        const syncFullscreenState = () => {
+          const isExpanded = fullscreenElement() === preview;
+          expandButton.setAttribute("aria-pressed", String(isExpanded));
+          expandButton.setAttribute(
+            "aria-label",
+            isExpanded
+              ? "Exit fullscreen whitepaper reader"
+              : "Expand whitepaper reader to fullscreen"
+          );
+          expandButton.title = isExpanded ? "Exit fullscreen" : "Expand reader";
+        };
+
+        expandButton.hidden = false;
+        expandButton.addEventListener("click", async () => {
+          try {
+            if (fullscreenElement() === preview) {
+              await exitFullscreen();
+            } else {
+              await requestFullscreen();
+            }
+          } catch {
+            syncFullscreenState();
+          }
+        });
+        document.addEventListener("fullscreenchange", syncFullscreenState);
+        document.addEventListener("webkitfullscreenchange", syncFullscreenState);
+        syncFullscreenState();
+      })();
+    </script>
   </body>
 </html>
