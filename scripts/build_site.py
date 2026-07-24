@@ -53,8 +53,14 @@ def build(root: Path) -> Path:
     template_path = root / "site" / "index.template.html"
     stylesheet_path = root / "site" / "styles.css"
     wordmark_path = root / "site" / "assets" / "neurolab-wordmark.png"
-    if not all(path.is_file() for path in (template_path, stylesheet_path, wordmark_path)):
-        raise FileNotFoundError("Required site template, stylesheet, or wordmark is missing")
+    brain_art_path = root / "site" / "assets" / "neural-brain-hero.webp"
+    if not all(
+        path.is_file()
+        for path in (template_path, stylesheet_path, wordmark_path, brain_art_path)
+    ):
+        raise FileNotFoundError(
+            "Required site template, stylesheet, wordmark, or brain artwork is missing"
+        )
 
     for release_path in sorted((root / "releases").glob("neurolab-whitepaper-v*.*")):
         if release_path.suffix in {".pdf", ".json"}:
@@ -65,6 +71,7 @@ def build(root: Path) -> Path:
     shutil.copy2(current_pdf, output / stable_pdf_name)
     shutil.copy2(stylesheet_path, output / "styles.css")
     shutil.copy2(wordmark_path, output / "assets" / wordmark_path.name)
+    shutil.copy2(brain_art_path, output / "assets" / brain_art_path.name)
 
     release_date = date.fromisoformat(current["releaseDate"])
     values = {

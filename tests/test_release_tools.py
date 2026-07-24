@@ -46,6 +46,7 @@ def write_valid_repository(root: Path) -> bytes:
     (site / "index.template.html").write_text(tokens, encoding="utf-8")
     (site / "styles.css").write_text("body {}", encoding="utf-8")
     (assets / "neurolab-wordmark.png").write_bytes(b"wordmark")
+    (assets / "neural-brain-hero.webp").write_bytes(b"brain-art")
     return pdf_data
 
 
@@ -111,6 +112,10 @@ class SiteBuildTests(unittest.TestCase):
             self.assertEqual(
                 (output / "assets" / "neurolab-wordmark.png").read_bytes(),
                 b"wordmark",
+            )
+            self.assertEqual(
+                (output / "assets" / "neural-brain-hero.webp").read_bytes(),
+                b"brain-art",
             )
             public_manifest = json.loads(
                 (output / "current-release.json").read_text(encoding="utf-8")
