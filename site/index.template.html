@@ -82,7 +82,7 @@
           </dl>
         </section>
 
-        <aside class="document-preview" aria-label="Current whitepaper preview">
+        <aside class="document-preview" aria-label="Current whitepaper reader">
           <div class="preview-toolbar">
             <span><span class="metadata-prefix" aria-hidden="true">//</span> Current_version: {{display_version}}</span>
             <span class="preview-tools">
@@ -99,17 +99,31 @@
               </a>
             </span>
           </div>
-          <a class="preview-link" href="{{pdf_path}}#page=1" target="_blank" rel="noopener">
-            <span class="document-sheet">
-              <img src="{{cover_image_path}}" alt="Cover of {{title}}, version {{display_version}}">
-            </span>
-            <span class="preview-caption">
-              <span>
-                <small>Version {{display_version}}</small>
-                <strong>Open Full Whitepaper</strong>
+          <div class="document-reader">
+            <iframe
+              class="pdf-reader"
+              src="{{stable_pdf_path}}#page=1&amp;view=FitH&amp;toolbar=0&amp;navpanes=0"
+              title="NeuroLab AI whitepaper version {{display_version}} inline reader"
+              loading="eager"
+            ></iframe>
+            <a
+              class="preview-link"
+              href="{{pdf_path}}#page=1"
+              target="_blank"
+              rel="noopener"
+              aria-label="Open the full NeuroLab AI whitepaper, version {{display_version}}"
+            >
+              <span class="document-sheet">
+                <img src="{{cover_image_path}}" alt="Cover of {{title}}, version {{display_version}}">
               </span>
-              <span class="preview-arrow" aria-hidden="true">&nearr;</span>
+            </a>
+          </div>
+          <a class="preview-caption" href="{{pdf_path}}#page=1" target="_blank" rel="noopener">
+            <span>
+              <small>Version {{display_version}}</small>
+              <strong>Open Full Whitepaper</strong>
             </span>
+            <span class="preview-arrow" aria-hidden="true">&nearr;</span>
           </a>
         </aside>
       </div>
