@@ -142,7 +142,6 @@ footer {
   -webkit-backdrop-filter: blur(12px);
   font-size: 0.7rem;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 .status-dot {
@@ -163,7 +162,6 @@ footer {
   color: var(--accent-light);
   font-size: 0.72rem;
   letter-spacing: 0.14em;
-  text-transform: uppercase;
 }
 
 h1 {
@@ -204,7 +202,6 @@ h1 {
   font-weight: 700;
   letter-spacing: 0.055em;
   text-decoration: none;
-  text-transform: uppercase;
   transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease, color 160ms ease, transform 160ms ease;
 }
 
@@ -262,7 +259,6 @@ h1 {
   color: var(--quiet);
   font-size: 0.66rem;
   letter-spacing: 0.09em;
-  text-transform: uppercase;
 }
 
 .release-data dd {
@@ -300,7 +296,6 @@ h1 {
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.045em;
-  text-transform: uppercase;
   text-underline-offset: 0.35rem;
 }
 
@@ -313,7 +308,6 @@ footer {
   color: var(--quiet);
   font-size: 0.67rem;
   letter-spacing: 0.06em;
-  text-transform: uppercase;
 }
 
 :focus-visible {
