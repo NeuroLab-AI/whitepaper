@@ -31,9 +31,11 @@ Open <http://localhost:8000/> after starting the preview server.
 2. Add it as `releases/neurolab-whitepaper-vMAJOR.MINOR.PATCH.pdf`.
 3. Add adjacent JSON metadata with the same filename stem.
 4. Record the PDF's SHA-256 checksum in the metadata.
-5. Update `current-release.json` to the new semantic version.
-6. Open a pull request and allow the validation workflow to finish.
-7. Merge after approval. The Pages workflow validates, builds, and deploys automatically.
+5. Render the PDF cover as an optimized version-specific WebP under `site/assets/`.
+6. Add `site/release-content/VERSION.json` with the matching semantic version, cover filename, page count, abstract, and PDF bookmark outline.
+7. Update `current-release.json` to the new semantic version.
+8. Open a pull request and allow the validation workflow to finish.
+9. Merge after approval. The Pages workflow validates, builds, and deploys automatically.
 
 Existing files under `releases/` must never be edited, renamed, or deleted. Corrections require a new version.
 
@@ -43,4 +45,4 @@ To roll back, change only `current-release.json` to a previously published seman
 
 ## Site generation
 
-The generated `_site/` directory is intentionally untracked. `scripts/build_site.py` creates it from the release archive and site template, publishes every archived release, copies the current release to the stable `neurolab-whitepaper.pdf` alias, and writes a public current-release manifest.
+The generated `_site/` directory is intentionally untracked. `scripts/build_site.py` creates it from the release archive, the site template, and the current version's `site/release-content/` record. It publishes every archived release, copies the current release to the stable `neurolab-whitepaper.pdf` alias, publishes the matching cover and contents, and writes a public current-release manifest.

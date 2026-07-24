@@ -22,8 +22,10 @@ def write_valid_repository(root: Path) -> bytes:
     releases = root / "releases"
     site = root / "site"
     assets = site / "assets"
+    release_content = site / "release-content"
     releases.mkdir(parents=True)
     assets.mkdir(parents=True)
+    release_content.mkdir(parents=True)
     pdf_data = b"%PDF-1.4\n1 0 obj\n<<>>\nendobj\n%%EOF\n"
     pdf_path = releases / "neurolab-whitepaper-v0.11.0.pdf"
     pdf_path.write_bytes(pdf_data)
@@ -47,6 +49,22 @@ def write_valid_repository(root: Path) -> bytes:
     (site / "styles.css").write_text("body {}", encoding="utf-8")
     (assets / "neurolab-wordmark.png").write_bytes(b"wordmark")
     (assets / "neural-brain-hero.webp").write_bytes(b"brain-art")
+    (assets / "neurolab-whitepaper-v0.11.0-cover.webp").write_bytes(b"cover")
+    (release_content / "0.11.0.json").write_text(
+        json.dumps(
+            {
+                "version": "0.11.0",
+                "pageCount": 33,
+                "coverImage": "neurolab-whitepaper-v0.11.0-cover.webp",
+                "abstract": "A concise release abstract.",
+                "contents": [
+                    {"title": "Abstract", "page": 2},
+                    {"title": "Conclusion", "page": 29},
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
     return pdf_data
 
 
@@ -117,14 +135,26 @@ class SiteBuildTests(unittest.TestCase):
                 (output / "assets" / "neural-brain-hero.webp").read_bytes(),
                 b"brain-art",
             )
+            self.assertEqual(
+                (
+                    output
+                    / "assets"
+                    / "neurolab-whitepaper-v0.11.0-cover.webp"
+                ).read_bytes(),
+                b"cover",
+            )
             public_manifest = json.loads(
                 (output / "current-release.json").read_text(encoding="utf-8")
             )
             self.assertEqual(public_manifest["title"], build_site.PUBLICATION_TITLE)
             self.assertEqual(public_manifest["stableAlias"], "neurolab-whitepaper.pdf")
+            self.assertEqual(public_manifest["pageCount"], 33)
+            self.assertEqual(public_manifest["contents"][0]["title"], "Abstract")
             rendered_index = (output / "index.html").read_text(encoding="utf-8")
             self.assertIn(build_site.PUBLICATION_TITLE, rendered_index)
             self.assertIn(hashlib.sha256(b"body {}").hexdigest()[:12], rendered_index)
+            self.assertIn("A concise release abstract.", rendered_index)
+            self.assertIn("Page 29", rendered_index)
             self.assertNotIn("{{", rendered_index)
 
 

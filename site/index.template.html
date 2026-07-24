@@ -15,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="./assets/neural-brain-hero.webp" type="image/webp">
+    <link rel="preload" as="image" href="{{cover_image_path}}" type="image/webp">
     <link rel="stylesheet" href="./styles.css?v={{stylesheet_version}}">
     <title>{{title}} - Version {{display_version}}</title>
   </head>
@@ -29,63 +30,95 @@
       </a>
     </header>
 
-    <main id="main" class="page-shell">
-      <section class="hero" aria-labelledby="whitepaper-title">
-        <div class="status-row">
-          <span class="status-dot" aria-hidden="true"></span>
-          <span>Public Review Draft</span>
-          <span class="status-divider" aria-hidden="true">//</span>
-          <span>Version {{display_version}}</span>
+    <main id="main">
+      <div class="page-shell">
+        <section class="hero" aria-labelledby="whitepaper-title">
+          <div class="status-row">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>Public Review Draft</span>
+            <span class="status-divider" aria-hidden="true">//</span>
+            <span>Version {{display_version}}</span>
+          </div>
+
+          <p class="eyebrow">Evidence-Led Systems for CNS Drug Discovery</p>
+          <h1 id="whitepaper-title">{{title}}</h1>
+          <p class="description">{{description}}</p>
+
+          <div class="actions">
+            <a class="button button-primary" href="{{pdf_path}}" target="_blank" rel="noopener">
+              Read Whitepaper
+              <span aria-hidden="true">&nearr;</span>
+            </a>
+            <a class="button button-secondary" href="{{stable_pdf_path}}" download>
+              Download PDF
+            </a>
+          </div>
+
+          <dl class="release-data">
+            <div>
+              <dt>
+                <span aria-hidden="true"><span class="metadata-prefix">//</span> Current_version</span>
+                <span class="visually-hidden">Current version</span>
+              </dt>
+              <dd>{{version}}</dd>
+            </div>
+            <div>
+              <dt>
+                <span aria-hidden="true"><span class="metadata-prefix">//</span> Document_version</span>
+                <span class="visually-hidden">Document version</span>
+              </dt>
+              <dd>{{display_version}}</dd>
+            </div>
+            <div>
+              <dt>
+                <span aria-hidden="true"><span class="metadata-prefix">//</span> Released</span>
+                <span class="visually-hidden">Released</span>
+              </dt>
+              <dd>{{release_date}}</dd>
+            </div>
+          </dl>
+        </section>
+
+        <aside class="document-preview" aria-label="Current whitepaper preview">
+          <div class="preview-toolbar">
+            <span><span class="metadata-prefix" aria-hidden="true">//</span> Current_publication</span>
+            <span>{{page_count}} pages</span>
+          </div>
+          <a class="preview-link" href="{{pdf_path}}#page=1" target="_blank" rel="noopener">
+            <span class="document-sheet">
+              <img src="{{cover_image_path}}" alt="Cover of {{title}}, version {{display_version}}">
+            </span>
+            <span class="preview-caption">
+              <span>
+                <small>Version {{display_version}}</small>
+                <strong>Open Full Whitepaper</strong>
+              </span>
+              <span class="preview-arrow" aria-hidden="true">&nearr;</span>
+            </span>
+          </a>
+        </aside>
+      </div>
+
+      <section class="inside-section" aria-labelledby="inside-title">
+        <div class="inside-intro">
+          <p class="section-label"><span class="metadata-prefix" aria-hidden="true">//</span> Document_overview</p>
+          <h2 id="inside-title">Inside the Whitepaper</h2>
+          <p>{{abstract}}</p>
+          <a class="text-link" href="{{pdf_path}}#page=2" target="_blank" rel="noopener">
+            Begin With the Abstract <span aria-hidden="true">&nearr;</span>
+          </a>
         </div>
 
-        <p class="eyebrow">Evidence-Led Systems for CNS Drug Discovery</p>
-        <h1 id="whitepaper-title">{{title}}</h1>
-        <p class="description">{{description}}</p>
-
-        <div class="actions">
-          <a class="button button-primary" href="{{pdf_path}}" target="_blank" rel="noopener">
-            Read Whitepaper
-            <span aria-hidden="true">&nearr;</span>
-          </a>
-          <a class="button button-secondary" href="{{stable_pdf_path}}" download>
-            Download PDF
-          </a>
+        <div class="contents-panel">
+          <div class="contents-header">
+            <h3>Contents</h3>
+            <span>{{page_count}} pages</span>
+          </div>
+          <ol class="contents-list">
+{{contents_html}}
+          </ol>
         </div>
-
-        <dl class="release-data">
-          <div>
-            <dt>
-              <span aria-hidden="true"><span class="metadata-prefix">//</span> Current_version</span>
-              <span class="visually-hidden">Current version</span>
-            </dt>
-            <dd>{{version}}</dd>
-          </div>
-          <div>
-            <dt>
-              <span aria-hidden="true"><span class="metadata-prefix">//</span> Document_version</span>
-              <span class="visually-hidden">Document version</span>
-            </dt>
-            <dd>{{display_version}}</dd>
-          </div>
-          <div>
-            <dt>
-              <span aria-hidden="true"><span class="metadata-prefix">//</span> Released</span>
-              <span class="visually-hidden">Released</span>
-            </dt>
-            <dd>{{release_date}}</dd>
-          </div>
-        </dl>
       </section>
-
-      <aside class="release-card" aria-label="Publication status">
-        <p class="card-label">Publication Status</p>
-        <h2>Current Public Release</h2>
-        <p>
-          This permanent address always identifies the currently published NeuroLab whitepaper.
-          Versioned releases remain immutable for review, rollback, and historical reference.
-        </p>
-        <a href="./current-release.json">View Release Metadata <span aria-hidden="true">&rarr;</span></a>
-      </aside>
     </main>
 
     <footer>
