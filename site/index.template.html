@@ -81,8 +81,16 @@
 
         <aside class="document-preview" aria-label="Current whitepaper preview">
           <div class="preview-toolbar">
-            <span><span class="metadata-prefix" aria-hidden="true">//</span> Current_publication</span>
-            <span>{{page_count}} pages</span>
+            <span><span class="metadata-prefix" aria-hidden="true">//</span> Current_version: {{display_version}}</span>
+            <span class="preview-tools">
+              <span>{{page_count}} pages</span>
+              <a
+                class="preview-download"
+                href="{{stable_pdf_path}}"
+                download
+                aria-label="Download whitepaper version {{display_version}} PDF"
+              ><span aria-hidden="true">&darr;</span></a>
+            </span>
           </div>
           <a class="preview-link" href="{{pdf_path}}#page=1" target="_blank" rel="noopener">
             <span class="document-sheet">
