@@ -4,7 +4,7 @@
   --surface: rgba(23, 23, 23, 0.82);
   --surface-raised: rgba(30, 30, 30, 0.88);
   --text: #ffffff;
-  --text-warm: #fbf5f2;
+  --text-warm: #ffffff;
   --muted: #ffffff;
   --quiet: #ffffff;
   --accent: #bf6a45;
@@ -150,8 +150,8 @@ footer {
 .site-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  min-height: 6.5rem;
+  justify-content: center;
+  min-height: 7.25rem;
   border-bottom: 1px solid var(--border);
 }
 
@@ -171,7 +171,7 @@ footer {
 
 .wordmark-image {
   display: block;
-  width: clamp(10.5rem, 14vw, 12.5rem);
+  width: clamp(12rem, 18vw, 15rem);
   height: auto;
 }
 
@@ -192,7 +192,7 @@ footer {
   border: 1px solid rgba(191, 106, 69, 0.34);
   border-radius: 999px;
   background: rgba(17, 17, 17, 0.78);
-  color: var(--accent-light);
+  color: var(--text);
   box-shadow: 0 0 0 0.5px rgba(191, 106, 69, 0.7), 0 0 8px rgba(191, 106, 69, 0.22);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -209,13 +209,14 @@ footer {
 }
 
 .status-divider {
-  color: var(--accent-deep);
+  color: var(--accent);
+  font-weight: 700;
 }
 
 .eyebrow,
 .card-label {
   margin: 0 0 1rem;
-  color: var(--accent-light);
+  color: var(--text);
   letter-spacing: 0.14em;
 }
 
@@ -275,8 +276,12 @@ h1 {
 
 .button-primary {
   background: var(--accent);
-  color: var(--page);
+  color: var(--text);
   box-shadow: 0 0 20px rgba(191, 106, 69, 0.28);
+}
+
+.button-primary > span {
+  font-weight: 700;
 }
 
 .button-primary:hover,
@@ -340,20 +345,18 @@ h1 {
 .release-card {
   margin-top: clamp(3rem, 5vw, 4.5rem);
   padding: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.13);
-  border-top-color: rgba(191, 106, 69, 0.66);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 0.35rem;
   background: linear-gradient(
     145deg,
-    rgba(31, 25, 22, 0.5),
-    rgba(10, 10, 10, 0.34)
+    rgba(24, 24, 24, 0.28),
+    rgba(10, 10, 10, 0.16)
   );
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.065),
-    0 22px 60px rgba(0, 0, 0, 0.4),
-    0 0 34px rgba(191, 106, 69, 0.07);
-  backdrop-filter: blur(24px) saturate(118%);
-  -webkit-backdrop-filter: blur(24px) saturate(118%);
+    inset 0 1px 0 rgba(255, 255, 255, 0.075),
+    0 22px 60px rgba(0, 0, 0, 0.34);
+  backdrop-filter: blur(14px) saturate(110%);
+  -webkit-backdrop-filter: blur(14px) saturate(110%);
 }
 
 .release-card h2 {
@@ -368,7 +371,7 @@ h1 {
 }
 
 .release-card a {
-  color: var(--accent-light);
+  color: var(--text);
   font-family: "Space Mono", "SFMono-Regular", Consolas, monospace;
   font-size: 0.72rem;
   font-weight: 700;
@@ -447,7 +450,11 @@ footer {
 
 @media (max-width: 560px) {
   .site-header {
-    min-height: 5.5rem;
+    min-height: 6rem;
+  }
+
+  .wordmark-image {
+    width: clamp(10.5rem, 48vw, 12rem);
   }
 
   .status-row {
