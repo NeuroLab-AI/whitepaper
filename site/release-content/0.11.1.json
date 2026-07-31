@@ -1,0 +1,92 @@
+{
+  "version": "0.11.1",
+  "pageCount": 33,
+  "coverImage": "neurolab-whitepaper-v0.11.1-cover.webp",
+  "abstract": "NeuroLab is an auditable neurosymbolic platform designed to connect evidence across chemical structure, molecular targets, cell and layer context, circuits, anatomy, cognition, and clinical observations. The whitepaper explains its routed prediction architecture, evidence contracts, validation boundaries, and research roadmap.",
+  "contents": [
+    {
+      "title": "Abstract",
+      "page": 2
+    },
+    {
+      "title": "Executive Scientific Summary",
+      "page": 3
+    },
+    {
+      "title": "1. Scope, Intended Use, and Non-Claims",
+      "page": 4
+    },
+    {
+      "title": "2. Falsifiable System Claims",
+      "page": 6
+    },
+    {
+      "title": "3. System Architecture",
+      "page": 6
+    },
+    {
+      "title": "4. Knowledge Substrate and Provenance",
+      "page": 12
+    },
+    {
+      "title": "5. Known-Compound Predictor",
+      "page": 13
+    },
+    {
+      "title": "6. Novel-Structure Retriever",
+      "page": 13
+    },
+    {
+      "title": "7. Symbolic Mechanism and Circuit Composition",
+      "page": 14
+    },
+    {
+      "title": "8. Brain, Cellular, Dose, Species, and Temporal Layers",
+      "page": 15
+    },
+    {
+      "title": "9. Uncertainty, Applicability, and Abstention",
+      "page": 17
+    },
+    {
+      "title": "10. Validation Design",
+      "page": 18
+    },
+    {
+      "title": "11. Current Evaluation Status",
+      "page": 19
+    },
+    {
+      "title": "12. Engineering Performance and Reproducibility",
+      "page": 20
+    },
+    {
+      "title": "13. Model Governance",
+      "page": 23
+    },
+    {
+      "title": "14. Multiscale Capability Matrix",
+      "page": 23
+    },
+    {
+      "title": "15. Scientific Development Gates",
+      "page": 25
+    },
+    {
+      "title": "16. Research Roadmap",
+      "page": 27
+    },
+    {
+      "title": "17. Discussion",
+      "page": 28
+    },
+    {
+      "title": "18. Conclusion",
+      "page": 29
+    },
+    {
+      "title": "Appendices and External References",
+      "page": 30
+    }
+  ]
+}
