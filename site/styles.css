@@ -70,7 +70,7 @@ body::before {
       rgba(105, 50, 34, 0.07) 28%,
       transparent 55%
     ),
-    url("./assets/neural-brain-hero.webp") calc(50% - 23vw) center / cover no-repeat;
+    url("./assets/neural-brain-hero.webp") 50% center / cover no-repeat;
 }
 
 body::after {
@@ -1061,7 +1061,7 @@ footer {
         rgba(191, 106, 69, 0.14) 0%,
         transparent 48%
       ),
-      url("./assets/neural-brain-hero.webp") 80% top / auto 68vh no-repeat;
+      url("./assets/neural-brain-hero.webp") 50% top / auto 68vh no-repeat;
   }
 
   body::after {
