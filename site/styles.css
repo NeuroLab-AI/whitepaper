@@ -1223,3 +1223,11 @@ footer {
    provides the masthead, so suppress this page's own header and footer. */
 .is-embedded .site-header,
 .is-embedded footer { display: none; }
+
+/* Embedded display mode: the shell paints the one shared backdrop, so
+   this page's own backdrop goes fully transparent inside the frame. */
+.is-embedded,
+.is-embedded body { background: transparent; }
+.is-embedded body::before,
+.is-embedded body::after,
+.is-embedded .ambient { display: none; }
