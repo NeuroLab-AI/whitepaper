@@ -1197,3 +1197,8 @@ footer {
     animation: none !important;
   }
 }
+
+/* Embedded display mode: the command center shell at neurolab-ai.github.io
+   provides the masthead, so suppress this page's own header and footer. */
+.is-embedded .site-header,
+.is-embedded footer { display: none; }
