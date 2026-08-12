@@ -70,7 +70,7 @@ body::before {
       rgba(105, 50, 34, 0.07) 28%,
       transparent 55%
     ),
-    url("./assets/neural-brain-hero.webp") calc(50% - 23vw) center / cover no-repeat;
+    url("./assets/neural-brain-hero.webp") 50% 6.5rem / min(78rem, 102vw) auto no-repeat;
 }
 
 body::after {
@@ -152,9 +152,19 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 8.75rem;
-  padding-block: 1.35rem;
-  border-bottom: 1px solid var(--border);
+  width: min(calc(100% - 2rem), 55rem);
+  margin: 0.9rem auto 0;
+  padding: 0.85rem 2rem 0.78rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 2.2rem;
+  background:
+    radial-gradient(circle at 50% 0, rgba(255, 255, 255, 0.1), transparent 52%),
+    linear-gradient(145deg, rgba(36, 31, 31, 0.78), rgba(6, 6, 7, 0.78));
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.13),
+    inset 0 -1px rgba(201, 111, 71, 0.17),
+    0 18px 55px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(24px) saturate(126%);
 }
 
 .status-row,
@@ -185,22 +195,22 @@ footer {
 
 .wordmark-image {
   display: block;
-  width: clamp(12rem, 18vw, 15rem);
+  width: clamp(10rem, 17vw, 13rem);
   height: auto;
 }
 
 .header-divider {
-  width: clamp(12rem, 18vw, 15rem);
+  width: clamp(11rem, 20vw, 15rem);
   height: 1px;
-  background: rgba(255, 255, 255, 0.68);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.64), transparent);
 }
 
 .header-tagline {
   margin: 0;
   color: var(--text);
-  font-size: clamp(0.76rem, 0.95vw, 0.84rem);
+  font-size: clamp(0.62rem, 1vw, 0.78rem);
   font-weight: 400;
-  letter-spacing: 0.075em;
+  letter-spacing: 0.09em;
   line-height: 1.45;
   text-align: center;
 }
@@ -1040,7 +1050,7 @@ footer {
         rgba(191, 106, 69, 0.14) 0%,
         transparent 48%
       ),
-      url("./assets/neural-brain-hero.webp") 80% top / auto 68vh no-repeat;
+      url("./assets/neural-brain-hero.webp") 50% top / auto 68vh no-repeat;
   }
 
   body::after {
