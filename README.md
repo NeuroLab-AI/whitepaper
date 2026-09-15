@@ -2,9 +2,9 @@
 
 This repository publishes the public NeuroLab whitepaper through GitHub Pages.
 
-- Permanent landing page: <https://neurolab-ai.github.io/whitepaper/>
-- Stable current-PDF URL: <https://neurolab-ai.github.io/whitepaper/neurolab-whitepaper.pdf>
-- Current release metadata: <https://neurolab-ai.github.io/whitepaper/current-release.json>
+- Permanent landing page: <https://launch.neurolabai.io/whitepaper/>
+- Stable current-PDF URL: <https://launch.neurolabai.io/whitepaper/neurolab-whitepaper.pdf>
+- Current release metadata: <https://launch.neurolabai.io/whitepaper/current-release.json>
 
 ## Current release
 
